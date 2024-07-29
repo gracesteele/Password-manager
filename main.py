@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import password
+import json
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -13,8 +14,12 @@ def save_data():
     website = website_input.get()
     email = email_input.get()
     pass_word = password_input.get()
-
-    info_to_save = f"{website} | {email} | {pass_word}"
+    new_data = {
+        website: {
+            "email": email,
+            "password": pass_word,
+        }
+    }
 
     if len(website) == 0 or len(email) == 0 or len(pass_word) == 0:
         messagebox.showwarning("Oops", "Please don't leave any fields empty!")
@@ -24,10 +29,11 @@ def save_data():
                                                       f"Password: {pass_word} \n"
                                                       f"Is it ok to save?")
         if is_ok:
-            with open("data.txt", "a") as save_file:
-                save_file.write(f"{info_to_save}\n")
-                website_input.delete(0, END)
-                password_input.delete(0, END)
+            with open("data.json", "w") as save_file:
+                json.dump(new_data, save_file, indent=4)
+
+            website_input.delete(0, END)
+            password_input.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
