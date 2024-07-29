@@ -5,9 +5,12 @@ from tkinter import *
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_data():
     info_to_save = f"{website_input.get()} | {email_input.get()} | {password_input.get()}"
-    save_data_file = open("data.txt", "a")
-    save_data_file.write(f"{info_to_save}\n")
-    save_data_file.close()
+
+    with open("data.txt", "a") as save_file:
+        save_file.write(f"{info_to_save}\n")
+        website_input.delete(0, END)
+        password_input.delete(0, END)
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
