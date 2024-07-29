@@ -32,6 +32,7 @@ website_input.focus()
 
 email_input = Entry(width=50)
 email_input.grid(row=2, column=1, columnspan=2)
+email_input.insert(0, "gssteeleuk@gmail.com")
 
 password_input = Entry(width=32)
 password_input.grid(row=3, column=1)
