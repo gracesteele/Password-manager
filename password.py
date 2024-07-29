@@ -17,9 +17,7 @@ def generate_password():
 
     shuffle(password_list)
 
-    password = ""
-    for char in password_list:
-        password += char
+    password = "".join(password_list)
 
     return password
 
