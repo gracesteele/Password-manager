@@ -2,5 +2,13 @@
     "test1": {
         "email": "gssteeleuk@gmail.com",
         "password": "$uou1N)TP!2#o60y"
+    },
+    "Amazon": {
+        "email": "gssteeleuk@gmail.com",
+        "password": "!Zm2t7a(d$JJRM&"
+    },
+    "Ebay": {
+        "email": "gssteeleuk@gmail.com",
+        "password": "WKeJ3B(f$1gK9S"
     }
 }
