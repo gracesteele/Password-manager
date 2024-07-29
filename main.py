@@ -59,15 +59,13 @@ def find_password():
         messagebox.showwarning("Oops", "No save data.")
     else:
         website = website_input.get()
-        try:
-            info = data[website]
-        except KeyError:
-            messagebox.showwarning("Oops", f"No data saved for {website}")
-        else:
-            email = info["email"]
-            pass_word = info["password"]
+        if website in data:
+            email = data[website]["email"]
+            pass_word = data[website]["password"]
             messagebox.showinfo(f"{website}",
                                 f"Email: {email}\nPassword: {pass_word}")
+        else:
+            messagebox.showwarning("Oops", f"No details for {website} exists.")
     finally:
         website_input.delete(0, END)
         password_input.delete(0, END)
