@@ -8,8 +8,13 @@ import json
 def password_generator():
     password_input.insert(0, password.generate_password())
 
-    
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+def write_to_file(data, filename):
+    with open(filename, "w") as save_file:
+        json.dump(data, save_file, indent=4)
+
+
 def save_data():
     website = website_input.get()
     email = email_input.get()
@@ -25,24 +30,21 @@ def save_data():
         messagebox.showwarning("Oops", "Please don't leave any fields empty!")
     else:
         is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \n"
-                                                      f"Email: {email} \n"
-                                                      f"Password: {pass_word} \n"
-                                                      f"Is it ok to save?")
+                                                              f"Email: {email} \n"
+                                                              f"Password: {pass_word} \n"
+                                                              f"Is it ok to save?")
         if is_ok:
             try:
                 with open("data.json", "r") as save_file:
                     # Reading old data
                     data = json.load(save_file)
             except FileNotFoundError:
-                with open("data.json", "w") as save_file:
-                    # Saving updated data
-                    json.dump(new_data, save_file, indent=4)
+                write_to_file(new_data, "data.json")
             else:
                 # Updating old data with new data
                 data.update(new_data)
 
-                with open("data.json", "w") as save_file:
-                    json.dump(data, save_file, indent=4)
+                write_to_file(data, "data.json")
             finally:
                 website_input.delete(0, END)
                 password_input.delete(0, END)
