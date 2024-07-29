@@ -29,15 +29,21 @@ def save_data():
                                                       f"Password: {pass_word} \n"
                                                       f"Is it ok to save?")
         if is_ok:
-            with open("data.json", "r") as save_file:
-                # Reading old data
-                data = json.load(save_file)
+            try:
+                with open("data.json", "r") as save_file:
+                    # Reading old data
+                    data = json.load(save_file)
+            except FileNotFoundError:
+                with open("data.json", "w") as save_file:
+                    # Saving updated data
+                    json.dump(new_data, save_file, indent=4)
+            else:
                 # Updating old data with new data
                 data.update(new_data)
-            with open("data.json", "w") as save_file:
-                # Saving updated data
-                json.dump(data, save_file, indent=4)
 
+                with open("data.json", "w") as save_file:
+                    json.dump(data, save_file, indent=4)
+            finally:
                 website_input.delete(0, END)
                 password_input.delete(0, END)
 
